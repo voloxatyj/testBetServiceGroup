@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    <title>secondPage</title>
+    <style>
+            body {
+                font-family: 'Barriecito', cursive;
+            }
+            table {
+                margin: 5rem;
+                max-width: 90%;
+                justify-content: center;
+            }
+            h1 {
+                text-align: center;
+                margin: 1rem;
+            }
+            .buttons-cliker {
+                display:flex;
+                cursor: pointer;
+                justify-content: center;
+            }
+            button:nth-child(odd) {
+                color:brown;
+            }
+            button:nth-child(even) {
+                color:chartreuse;
+            }
+            button:nth-child(3) {
+                color:gold;
+            }
+            .btnAddUser {
+                width:85%;
+                display:inline-flex;
+                justify-content: flex-end;
+            }
+            #buttonAddItem {
+                margin-right: 1rem;
+            }
+            #app {
+                display: grid;
+                justify-content: center;
+                text-align: center;
+            }
+            .form-group {
+                margin-top: 1rem;
+            }
+        </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title2}}</h1>
+        <table class="table table-bordered">
+            <div class="btnAddUser">
+                <button @click='handleAdded' style="color:chartreuse;" type="button" class="btn btn-outline-dark">Add Item</button>
+                <button style="color:brown;" type="button" class="btn btn-outline-dark" onClick="location.href='index.html'">Co back</button>
+                <button style="color:blue;" type="button" class="btn btn-outline-dark" @click=handleUpload>Upload</button> 
+            </div>
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">email</th>
+                    <th scope="col">phone</th>
+                    <th scope="col">adress</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in items" v-bind:key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.address.street}}</td>
+                    <td>
+                        <div class="buttons-cliker">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <button class="btn btn-secondary" @click='handleDelete(item)'>Delete</button>
+                                <button class="btn btn-secondary" @click='handleEdit(item)'>Edit</button>
+                            </div> 
+                          </div> 
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="form-group" v-show="seen">
+                <label>ID</label>
+                <input type="text" class="form-control my-3" v-model="input.id">
+            </div>
+            <div class="form-group" v-show="seen">
+                <label>Name</label>
+                <input type="text" class="form-control my-3" v-model="input.name">
+            </div>
+            <div class="form-group" v-show="seen">
+                <label>Email</label>
+                <input type="text" class="form-control my-3" v-model="input.email">
+            </div>
+            <div class="form-group" v-show="seen">
+                <label>Phone</label>
+                <input type="text" class="form-control my-3" v-model="input.phone">
+            </div>
+            <div class="form-group" v-show="seen">
+                <label>Address</label>
+                <textarea type="text" class="form-control my-3" v-model="input.address.street"></textarea>
+            </div>
+            <div class="buttons-cliker">
+                <button @click.prevent="handleSave(input.id)" class="btn btn-primary" v-show="seen">Save</button></br>
+                <button @click.prevent="handleClear" class="btn btn-info" v-show="seen">Clear</button></br>
+            </div>
+        </div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src='app.js'></script>
+</body>
+</html>
